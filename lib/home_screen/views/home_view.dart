@@ -1,31 +1,24 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-
-import '../../widgets/navigation_bar.dart';
-import '../../widgets/section_view.dart';
-import 'featured_list_view.dart';
+import 'package:get/get.dart';
+import 'package:jyuk/home_screen/controllers/home_screen_controller.dart';
+import 'package:jyuk/home_screen/widgets/navigation_bar.dart';
+import 'package:jyuk/landing_view/views/landing_view.dart';
+import 'package:jyuk/prayer_group_screen/prayer_groups.dart';
 
 class Home extends StatelessWidget {
   const Home({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    return const Scaffold(
-      body: CustomScrollView(slivers: [
-        CupertinoSliverNavigationBar(
-          backgroundColor: Colors.transparent,
-          largeTitle: Text("Jesus Youth UK"),
-          stretch: true,
-        ),
-        SliverList(
-            delegate: SliverChildListDelegate.fixed([
-          SectionView(
-            child: FeaturedListView(),
-            height: 464,
-          ),
-        ]))
-      ]),
-      bottomNavigationBar: AppNavigationBar(),
+    final HomeScreenController _page = Get.put(HomeScreenController());
+    return Scaffold(
+      extendBody: true,
+      body: PageView(
+        physics: const NeverScrollableScrollPhysics(),
+        controller: _page.homePageController.value,
+        children: [const LandingView(), PrayerGroupsView()],
+      ),
+      bottomNavigationBar: const AppNavigationBar(),
     );
   }
 }
