@@ -1,5 +1,3 @@
-import 'dart:ui';
-
 import 'package:flutter/material.dart';
 
 class SectionView extends StatelessWidget {
@@ -17,19 +15,14 @@ class SectionView extends StatelessWidget {
           children: [
             Positioned(
                 bottom: 0,
-                child: ClipRRect(
-                  child: BackdropFilter(
-                    filter: ImageFilter.blur(sigmaX: 15, sigmaY: 15),
-                    child: Container(
-                      height: 150,
-                      width: MediaQuery.of(context).size.width,
-                      decoration: BoxDecoration(
-                          gradient: LinearGradient(
-                              colors: [Colors.grey[50]!, Colors.grey[200]!],
-                              begin: Alignment.topCenter,
-                              end: Alignment.bottomCenter)),
-                    ),
-                  ),
+                child: Container(
+                  height: 100,
+                  width: MediaQuery.of(context).size.width,
+                  decoration: BoxDecoration(
+                      gradient: LinearGradient(colors: [
+                    Colors.transparent,
+                    Theme.of(context).dividerColor,
+                  ], begin: Alignment.topCenter, end: Alignment.bottomCenter)),
                 )),
             child,
           ],
