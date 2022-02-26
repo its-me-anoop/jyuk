@@ -8,12 +8,14 @@ class VideoItems extends StatefulWidget {
   final bool looping;
   final bool autoplay;
   final bool fullScreen;
+  final Duration thumbnailDuration;
 
   const VideoItems({
     required this.videoPlayerController,
     required this.looping,
     required this.autoplay,
     required this.fullScreen,
+    required this.thumbnailDuration,
     Key? key,
   }) : super(key: key);
 
@@ -30,6 +32,7 @@ class _VideoItemsState extends State<VideoItems> {
     _chewieController = ChewieController(
       videoPlayerController: widget.videoPlayerController,
       aspectRatio: 16 / 9,
+      startAt: widget.thumbnailDuration,
       autoInitialize: true,
       fullScreenByDefault: widget.fullScreen,
       autoPlay: widget.autoplay,

@@ -15,13 +15,16 @@ class LandingView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return const CustomScrollView(slivers: [
+    return CustomScrollView(slivers: [
       CupertinoSliverNavigationBar(
+        brightness: Theme.of(context).brightness,
         backgroundColor: Colors.transparent,
-        largeTitle: Text("Jesus Youth UK"),
+        largeTitle: const Text(
+          "Jesus Youth UK",
+        ),
         stretch: true,
       ),
-      SliverList(
+      const SliverList(
           delegate: SliverChildListDelegate.fixed([
         SectionView(
           child: FeaturedListView(),
@@ -29,6 +32,7 @@ class LandingView extends StatelessWidget {
         ),
         SectionView(child: EventsListView(), height: 364),
         SectionView(child: VideoListView(), height: 400),
+        SectionView(child: EventsListView(), height: 364),
         SizedBox(
           height: 200,
         )
@@ -45,7 +49,7 @@ class VideoListView extends StatelessWidget {
     return Container(
       width: MediaQuery.of(context).size.width,
       height: 400,
-      color: Colors.blueGrey[900],
+      color: Colors.black,
       child: Stack(
         children: [
           Align(
@@ -59,6 +63,7 @@ class VideoListView extends StatelessWidget {
                 looping: true,
                 autoplay: true,
                 fullScreen: false,
+                thumbnailDuration: const Duration(seconds: 5),
               ),
             ),
           ),
@@ -70,12 +75,12 @@ class VideoListView extends StatelessWidget {
                 child: BackdropFilter(
                   filter: ImageFilter.blur(sigmaX: 3, sigmaY: 3),
                   child: Container(
-                    decoration: BoxDecoration(
+                    decoration: const BoxDecoration(
                         gradient: LinearGradient(
                             colors: [
                           Colors.transparent,
-                          Colors.blueGrey[900]!.withOpacity(0.5),
-                          Colors.blueGrey[900]!
+                          Colors.blueGrey,
+                          Colors.black
                         ],
                             begin: Alignment.topCenter,
                             end: Alignment.bottomCenter)),
@@ -104,25 +109,31 @@ class VideoListView extends StatelessWidget {
                                 child: SizedBox(
                                   height: 158,
                                   child: ListView.builder(
+                                      itemCount: 3,
                                       scrollDirection: Axis.horizontal,
                                       itemBuilder: (_, index) {
                                         return Padding(
                                           padding: const EdgeInsets.all(8.0),
-                                          child: Container(
-                                            height: 148.5,
-                                            width: 264,
-                                            decoration: BoxDecoration(
+                                          child: ClipRRect(
+                                            borderRadius:
+                                                BorderRadius.circular(10),
+                                            child: Container(
+                                              height: 148.5,
+                                              width: 264,
+                                              decoration: const BoxDecoration(
                                                 color: Colors.black,
-                                                borderRadius:
-                                                    BorderRadius.circular(10)),
-                                            child: VideoItems(
-                                              videoPlayerController:
-                                                  VideoPlayerController.asset(
-                                                'assets/video.mp4',
                                               ),
-                                              looping: false,
-                                              autoplay: false,
-                                              fullScreen: true,
+                                              child: VideoItems(
+                                                videoPlayerController:
+                                                    VideoPlayerController.asset(
+                                                  'assets/video.mp4',
+                                                ),
+                                                looping: false,
+                                                autoplay: false,
+                                                fullScreen: true,
+                                                thumbnailDuration: Duration(
+                                                    seconds: 10 * index + 10),
+                                              ),
                                             ),
                                           ),
                                         );
