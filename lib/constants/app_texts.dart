@@ -1,3 +1,2 @@
-String appName = "Ripples";
-String appNameShort = "Ripples";
-String ownerName = "Jesus Youth UK";
+String appName = "Jesus Youth UK";
+String appNameShort = "JYUK";
